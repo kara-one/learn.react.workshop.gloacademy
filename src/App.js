@@ -18,7 +18,7 @@ class App extends React.Component {
     };
 
     componentDidMount() {
-        this.updateRocket();        
+        this.updateRocket();
         // this.fetchData.getCompany().then(data => console.log('FetchData: ', data));
     }
 
@@ -50,7 +50,7 @@ class App extends React.Component {
                     changeRocket={this.changeRocket}
                 />
                 <Main rocket={this.state.rocket} />
-                <Features />
+                <Features rocketFeatures={this.state.rocketFeatures} />
                 {/* <Details />
                 <Calendar /> */}
                 <Footer />
