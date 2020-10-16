@@ -82,7 +82,7 @@ class App extends React.Component {
                     <Details />
                 </Route>
 
-                <Footer company={this.state.company} />
+                <Footer />
             </BrowserRouter>
         );
     }
