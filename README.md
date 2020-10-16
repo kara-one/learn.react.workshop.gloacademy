@@ -1,5 +1,5 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-Create from workshop GloAcademy
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).<br />
+Create from workshop GloAcademy<br />
 API https://github.com/r-spacex/SpaceX-API/blob/master/docs/v4/README.md
 
 ## Available Scripts
