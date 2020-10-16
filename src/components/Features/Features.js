@@ -17,7 +17,7 @@ const Features = ({ rocketFeatures }) => {
 
     return (
         <>
-            <Main />
+            <Main rocket={rocketFeatures.name} />
             <section className="features">
                 <h2 className="features-title">
                     {rocketFeatures.name}

@@ -1,57 +1,69 @@
 import './details.css';
 
-import { Link, useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
 import FetchData from '../../service/FetchData';
+import Main from '../Main/Main';
+import Youtube from 'react-youtube';
+import useLaunches from '../useLaunches/useLaunches';
 
 const fetchData = new FetchData();
 
-const Details = () => {
+const Details = (props) => {
+    // Other get Data
+    const [launch, setLaunch] = useState(null);
+    const { getLaunch } = useLaunches();
+    useEffect(() => {
+        setLaunch(getLaunch(props.match.params.topicId));
+    }, [getLaunch]);
+    // console.log('launch: ', launch);
+    // ..Other get Data
+
+    const history = useHistory();
+
+    //let topicId = props.match.params.id;
     let { topicId } = useParams();
 
-    const [data, setData] = useState([]);    
-
+    // My get Data
+    const [data, setData] = useState([]);
     useEffect(() => {
         fetchData
             .getLaunches()
-            .then((launches) =>
-                setData(launches.filter((item) => item.id === topicId)[0]),
+            .then(
+                (launches) =>
+                    topicId &&
+                    setData(launches.filter((item) => item.id === topicId)[0]),
             );
     }, []);
-    // console.log('data:: ', data);
+    // console.log('data:: ', props);
 
+    if (!launch) return null;
     return (
-        <section className="details">
-            <div className="container">
-                <div className="details-row">
-                    <div className="details-image">
-                        <img
-                            src={data.links && data.links.patch.small}
-                            alt={data.name}
-                        />
+        <>
+            <Main name={data.name} />
+            <section className="details">
+                <div className="container">
+                    <div className="details-row">
+                        <div className="details-image">
+                            <img
+                                src={data.links && data.links.patch.small}
+                                alt={data.name}
+                            />
+                        </div>
+                        <div className="details-content">
+                            <p className="details-description">
+                                {data.details}
+                            </p>
+                        </div>
                     </div>
-                    <div className="details-content">
-                        <p className="details-description">{data.details}</p>
-                    </div>
+                    <Youtube className="details-youtube" videoId={data.links.youtube_id} />                    
                 </div>
-                <div>
-                    <iframe
-                        title="details-youtube"
-                        className="details-youtube"
-                        width="560"
-                        height="315"
-                        src="https://www.youtube.com/embed/dLQ2tZEH6G0"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    ></iframe>
-                </div>
-            </div>
-            <Link to={'/calendar'} className="button button-back">
-                go back
-            </Link>
-        </section>
+                <a onClick={history.goBack} className="button button-back">
+                    go back
+                </a>
+            </section>
+        </>
     );
 };
 
