@@ -77,7 +77,7 @@ class App extends React.Component {
                     <Calendar />
                 </Route>
 
-                <Route exact path="/details">
+                <Route exact path="/details/:topicId">
                     {/* <Main /> */}
                     <Details />
                 </Route>

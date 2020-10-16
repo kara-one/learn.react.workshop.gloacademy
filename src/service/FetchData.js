@@ -11,10 +11,12 @@ export default class FetchData {
         return await res.json();
     };
 
-    getRocket = async () => await this.getResource(this.startUrl + 'rockets');
+    getRocket = async () =>
+        await this.getResource(this.startUrl + 'rockets');
 
     getLaunches = async () =>
         await this.getResource(this.startUrl + 'launches/past');
 
-    getCompany = async () => await this.getResource(this.startUrl + 'company');
+    getCompany = async () =>
+        await this.getResource(this.startUrl + 'company');
 }

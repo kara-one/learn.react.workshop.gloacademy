@@ -14,7 +14,7 @@ const Calendar = () => {
     useEffect(() => {
         fetchData.getLaunches().then((launches) => setData(launches));
     }, []);
-    console.log(data);
+    console.log('data:: ', data);
 
     return (
         <>
@@ -36,7 +36,7 @@ const Calendar = () => {
                                             {item.name}
                                         </h2>
                                         <Link
-                                            to="details"
+                                            to={`details/${item.id}`}
                                             className="button launches-details"
                                         >
                                             Подробнее

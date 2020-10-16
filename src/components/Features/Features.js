@@ -21,7 +21,6 @@ const Features = ({ rocketFeatures }) => {
             <section className="features">
                 <h2 className="features-title">
                     {rocketFeatures.name}
-                    {console.log('rocketFeatures:: ', rocketFeatures)}
                     <br />
                     Overview
                 </h2>
