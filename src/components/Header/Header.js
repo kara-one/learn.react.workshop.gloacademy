@@ -14,15 +14,16 @@ const Header = ({ rockets, changeRocket }) => (
             <ul className="list">
                 {rockets.map((item, i) => (
                     <li className="item" key={i}>
-                        <Link
-                            to="/rocket"
+                        <NavLink
+                            to={`/rocket/${item.replace(' ', '_').toLowerCase()}`}
                             onClick={() => {
                                 changeRocket(item);
                             }}
                             className="item-link"
+                            activeClassName="active"
                         >
                             {item}
-                        </Link>
+                        </NavLink>
                     </li>
                 ))}
             </ul>

@@ -3,17 +3,22 @@ import './features.css';
 import Main from '../Main/Main';
 import React from 'react';
 import RellaxWrapper from 'react-rellax-wrapper';
+import useFeatures from '../../hooks/useFeatures/useFeatures';
+import { useParams } from 'react-router-dom';
 
 const rocketImages = {
     'Falcon 1': 'falcon-1',
     'Falcon 9': 'falcon-9',
     'Falcon Heavy': 'falcon-heavy',
-    'Starship': 'starship',
+    Starship: 'starship',
     other: 'falcon-1',
 };
 
-const Features = ({ rocketFeatures }) => {
-    if (!rocketFeatures) return '';
+const Features = () => {
+    let { slug } = useParams();
+    const { rocketFeatures } = useFeatures(slug);
+
+    if (Object.keys(rocketFeatures).length === 0) return null;
 
     return (
         <>
@@ -65,7 +70,7 @@ const Features = ({ rocketFeatures }) => {
 
                     <RellaxWrapper speed={14}>
                         <img
-                            src={`./img/${
+                            src={`../img/${
                                 rocketImages.hasOwnProperty(rocketFeatures.name)
                                     ? rocketImages[rocketFeatures.name]
                                     : rocketImages.other

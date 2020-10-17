@@ -6,7 +6,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import FetchData from '../../service/FetchData';
 import Main from '../Main/Main';
 import Youtube from 'react-youtube';
-import useLaunches from '../useLaunches/useLaunches';
+import useLaunches from '../../hooks/useLaunches/useLaunches';
 
 const fetchData = new FetchData();
 
@@ -16,16 +16,16 @@ const Details = (props) => {
     const { getLaunch } = useLaunches();
     useEffect(() => {
         setLaunch(getLaunch(props.match.params.topicId));
-    }, [getLaunch]);
+    }, [getLaunch, props.match.params.topicId]);
     // console.log('launch: ', launch);
     // ..Other get Data
 
     const history = useHistory();
 
-    //let topicId = props.match.params.id;
-    let { topicId } = useParams();
 
     // My get Data
+    let { topicId } = useParams();
+    //let topicId = props.match.params.id;
     const [data, setData] = useState([]);
     useEffect(() => {
         fetchData
@@ -35,9 +35,10 @@ const Details = (props) => {
                     topicId &&
                     setData(launches.filter((item) => item.id === topicId)[0]),
             );
-    }, []);
+    }, [topicId]);
     // console.log('data:: ', props);
-
+    // ..My get Data
+    
     if (!launch) return null;
     return (
         <>
@@ -57,9 +58,12 @@ const Details = (props) => {
                             </p>
                         </div>
                     </div>
-                    <Youtube className="details-youtube" videoId={data.links.youtube_id} />                    
+                    <Youtube
+                        className="details-youtube"
+                        videoId={data.links.youtube_id}
+                    />                    
                 </div>
-                <a onClick={history.goBack} className="button button-back">
+                <a href="/calendar" onClick={history.goBack} className="button button-back">
                     go back
                 </a>
             </section>

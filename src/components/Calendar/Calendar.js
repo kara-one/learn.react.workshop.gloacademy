@@ -3,7 +3,7 @@ import './calendar.css';
 import { Link } from 'react-router-dom';
 import Main from '../Main/Main';
 import React from 'react';
-import useLaunches from '../useLaunches/useLaunches';
+import useLaunches from '../../hooks/useLaunches/useLaunches';
 
 const Calendar = () => {
     const { data } = useLaunches();

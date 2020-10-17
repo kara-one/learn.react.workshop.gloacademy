@@ -9,7 +9,6 @@ import FetchData from './service/FetchData';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
-import Main from './components/Main/Main';
 import React from 'react';
 
 class App extends React.Component {
@@ -73,16 +72,7 @@ class App extends React.Component {
                     }
                 />
 
-                <Route
-                    path="/rocket"
-                    render={() =>
-                        this.state.rocketFeatures && (
-                            <Features
-                                rocketFeatures={this.state.rocketFeatures}
-                            />
-                        )
-                    }
-                />
+                <Route path="/rocket/:slug" component={Features} />
 
                 <Route exact path="/calendar" component={Calendar} />
 
